@@ -1,0 +1,114 @@
+public partial class Form1 : Form
+    {
+        SqlConnection con = new SqlConnection("Data Source=KAMILEENER-DELL\\KAMILEENER;Initial Catalog=haberCek;Integrated Security=True");
+
+
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            comboBox1.Items.Add("Milliyet");
+            comboBox1.Items.Add("Google");
+            comboBox1.Items.Add("Hürriyet");
+            comboBox1.Items.Add("Sözcü");
+            comboBox1.Items.Add("Sabah");
+
+            comboBox1.Items.Add("Gündem");
+            comboBox1.Items.Add("Dünya");
+            comboBox1.Items.Add("Ekonomi");
+            comboBox1.Items.Add("Teknoloji");
+            comboBox1.Items.Add("Magazin");
+            comboBox1.Items.Add("Sağlık");
+
+
+
+
+        }
+
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            listBox1.Items.Clear();
+
+            if (comboBox1.SelectedItem.ToString()=="Hürriyet")
+            {
+
+                XmlTextReader xmlread = new XmlTextReader("http://www.hurriyet.com.tr/rss/anasayfa");
+                while (xmlread.Read())
+                {
+                    if (xmlread.Name == "title")
+                    {
+                        listBox1.Items.Add(xmlread.ReadString());
+                    }
+                }
+                
+            }
+
+            else if (comboBox1.SelectedItem.ToString() == "Milliyet")
+            {
+                listBox1.Items.Clear();
+                XmlTextReader xmlread = new XmlTextReader("http://www.milliyet.com.tr/rss/rssNew/gundemRss.xml");
+                while (xmlread.Read())
+                {
+                    if (xmlread.Name == "title")
+                    {
+                        listBox1.Items.Add(xmlread.ReadString());
+                    }
+                }
+
+            }
+
+
+            else if (comboBox1.SelectedItem.ToString() == "Google")
+            {
+                listBox1.Items.Clear();
+                XmlTextReader xmlread = new XmlTextReader("https://news.google.com/rss?hl=tr&gl=TR&ceid=TR:tr");
+                while (xmlread.Read())
+                {
+                    if (xmlread.Name == "title")
+                    {
+                        listBox1.Items.Add(xmlread.ReadString());
+                    }
+                }
+
+            }
+
+
+            else if (comboBox1.SelectedItem.ToString() == "Sözcü")
+            {
+                listBox1.Items.Clear();
+                XmlTextReader xmlread = new XmlTextReader("https://www.sozcu.com.tr/feed");
+                while (xmlread.Read())
+                {
+                    if (xmlread.Name == "title")
+                    {
+                        listBox1.Items.Add(xmlread.ReadString());
+                    }
+                }
+
+            }
+
+
+            else if (comboBox1.SelectedItem.ToString() == "Sabah")
+            {
+                listBox1.Items.Clear();
+                XmlTextReader xmlread = new XmlTextReader("https://www.sabah.com.tr/rss/anasayfa.xml");
+                while (xmlread.Read())
+                {
+                    if (xmlread.Name == "title")
+                    {
+                        listBox1.Items.Add(xmlread.ReadString());
+                    }
+                }
+
+            }
+
+
+
+
+
+
+        }
